@@ -178,12 +178,10 @@ def opIsQuadrada():
 
 def opIsTriangularSuperior():
   m1 = obterMatriz()['matriz']
-  show_matriz(m1)
   print('é triangular superior' if isTriangularSuperior(m1) else 'não é trinagular superior')
 
 def opIsTriangularInferior():
   m1 = obterMatriz()['matriz']
-  show_matriz(m1)
   print('é triangular inferior' if isTriangularInferior(m1) else 'não é trinagular inferior')
   
 def opMultiplica_matrizes():
