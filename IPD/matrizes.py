@@ -87,8 +87,6 @@ def isTriangularInferior(matriz):
 
 def multiplica_matrizes(m1,m2):
   '''realiza a operação de multiplicar as matrizes'''
-  if len(m1) != len(m2[0]):
-    return -1
   resultado = criar_matriz_nula(len(m1),len(m2[0]))
   for x in range(len(m1)):
     for y in range(len(m2[0])):
@@ -111,24 +109,37 @@ def show_matriz(matriz):
       print(e,end='  ')
     print('\n\n')
 
+def tryToInt(num):
+  n = float(num)
+  if (n%1) == 0:
+    return int(n)
+  return n
+
 def getWithoutError(text,erro = False):
   '''consegue obter uma informação numérica sem quebrar o sistema inteiro em caso de erro'''
   try:
     if erro:
-      return float(input(f'{text} novamente pois o input colocado foi invalido : '))
-    return float(input(f'{text}: '))
+      return tryToInt(input(f'{text} novamente pois o input colocado foi invalido : '))
+    return tryToInt(input(f'{text}: '))
   except:
     return getWithoutError(f'{text}',True)
 
 def obterMatriz(initialText='matriz:',linhas=0,colunas=0):
   '''função utilizada para que o usuário consiga adicionar uma matriz na execução do sistema sem precisar modificar o código'''
   print(f'\n\n{initialText}\n')
-  if linhas == 0 and colunas == 0:
-    linhas,colunas = int(getWithoutError('linhas ')),int(getWithoutError('colunas'))
+
+  if linhas == 0 :
+    linhas = int(getWithoutError('linhas '))
+  if colunas == 0 :
+    colunas = int(getWithoutError('colunas '))
+
   matrizZero = criar_matriz_nula(linhas,colunas)
   for i,linha in enumerate(matrizZero):
     for k,elemento in enumerate(linha):
       matrizZero[i][k] = getWithoutError(f'elemento de coordenadas[{i + 1}][{k + 1}]')
+  
+  show_matriz(matrizZero)
+
   return {
       "matriz" : matrizZero,
       "colunas" : colunas,
@@ -137,7 +148,7 @@ def obterMatriz(initialText='matriz:',linhas=0,colunas=0):
 
 #------------------funções de chamada-----------------------------
 def opIdentidade():
-  show_matriz(getWithoutError('ordem'))
+  show_matriz(identidade((getWithoutError('ordem'))))
 
 def opCriar_matriz_nula():
   linhas = getWithoutError('linhas')
@@ -174,12 +185,13 @@ def opIsTriangularInferior():
   m1 = obterMatriz()['matriz']
   show_matriz(m1)
   print('é triangular inferior' if isTriangularInferior(m1) else 'não é trinagular inferior')
-
-
   
+def opMultiplica_matrizes():
+  m1Dict = obterMatriz('m1:')
+  linhas, colunas = m1Dict['linhas'],m1Dict['colunas']
+  m1,m2 = m1Dict['matriz'], obterMatriz('m2',colunas=colunas)['matriz']
+  show_matriz(multiplica_matrizes(m1,m2))
 
-
-  
 
 # ----------------------------------------------------------------
 funcoesDeOperacoes = [
@@ -191,8 +203,7 @@ funcoesDeOperacoes = [
   opIsQuadrada,
   opIsTriangularSuperior,
   opIsTriangularInferior,
-  # opMultiplica_matrizes,
-  # opRedefinir_elemento,
+  opMultiplica_matrizes,
 ]
 
 def getFuncNumber():
@@ -206,8 +217,7 @@ def getFuncNumber():
   print(7,'isTriangularSuperior')
   print(8,'isTriangularInferior')
   print(9,'multiplica_matrizes')
-  print(10,'redefinir_elemento')
-  num = int(getWithoutError('numero da função'))
+  num = getWithoutError('numero da função')
   return num-1
 
 def main():
