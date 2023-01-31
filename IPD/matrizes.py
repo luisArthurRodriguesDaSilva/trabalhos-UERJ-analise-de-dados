@@ -187,7 +187,7 @@ def opIsTriangularInferior():
 def opMultiplica_matrizes():
   m1Dict = obterMatriz('m1:')
   linhas, colunas = m1Dict['linhas'],m1Dict['colunas']
-  m1,m2 = m1Dict['matriz'], obterMatriz('m2',colunas=colunas)['matriz']
+  m1,m2 = m1Dict['matriz'], obterMatriz('m2',linhas=colunas)['matriz']
   show_matriz(multiplica_matrizes(m1,m2))
 
 
@@ -205,7 +205,7 @@ funcoesDeOperacoes = [
 ]
 
 def getFuncNumber():
-  print('catalogo de funções, digite o numero relativo a que você quer')
+  print('catalogo de funções, digite o numero relativo a que você quer e um maior que 9 se não')
   print(1,'identidade')
   print(2,'criar_matriz_nula')
   print(3,'densidade')
@@ -223,6 +223,9 @@ def main():
     numeroDaOperacao = getFuncNumber()
     if (numeroDaOperacao+1) > len(funcoesDeOperacoes):
       print('parabens por ter feito bom uso da calculadora de matrizes')
+      break
+    if(numeroDaOperacao<0):
+      print(f'e {numeroDaOperacao+1} é operação aonde?')
       break
     funcoesDeOperacoes[numeroDaOperacao]()
     print('\n\n')
