@@ -168,11 +168,11 @@ def opSoma_matrizes():
   m1Dict = obterMatriz('m1:')
   linhas, colunas = m1Dict['linhas'],m1Dict['colunas']
   m1,m2 = m1Dict['matriz'], obterMatriz('m2',linhas=linhas,colunas=colunas)['matriz']
+  print('a soma é: ')
   show_matriz(soma_matrizes(m1,m2))
 
 def opIsQuadrada():
   m1 = obterMatriz()['matriz']
-  show_matriz(m1)
   print('é quadrada' if isQuadrada(m1) else 'não é quadrada')
 
 
