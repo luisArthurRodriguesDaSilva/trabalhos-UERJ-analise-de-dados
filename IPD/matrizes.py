@@ -129,9 +129,9 @@ def obterMatriz(initialText='matriz:',linhas=0,colunas=0):
   print(f'\n\n{initialText}\n')
 
   if linhas == 0 :
-    linhas = int(getWithoutError('linhas '))
+    linhas = getWithoutError('linhas ')
   if colunas == 0 :
-    colunas = int(getWithoutError('colunas '))
+    colunas = getWithoutError('colunas ')
 
   matrizZero = criar_matriz_nula(linhas,colunas)
   for i,linha in enumerate(matrizZero):
