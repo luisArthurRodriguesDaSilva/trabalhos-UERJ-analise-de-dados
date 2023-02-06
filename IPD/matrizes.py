@@ -49,8 +49,6 @@ def verificar_igualdade_proporcional(m1,m2):
 
 def soma_matrizes (m1,m2):
   '''retorn a soma das matrizes'''
-  if not verificar_igualdade_proporcional(m1,m2):
-    return -1
   novaMatriz=[]
   for indexL,LineM1 in enumerate(m1):
     internMatriz = []
